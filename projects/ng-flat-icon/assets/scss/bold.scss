@@ -1,0 +1,54 @@
+@use "variables" as FlatIconVariables ;
+
+@font-face {
+  font-family: "uicons-bold-rounded";
+  src: url("../webfonts/uicons-bold-rounded.eot#iefix") format("embedded-opentype"), url("../webfonts/uicons-bold-rounded.woff2") format("woff2"), url("../webfonts/uicons-bold-rounded.woff") format("woff");
+}
+
+@font-face {
+  font-family: "uicons-bold-straight";
+  src: url("../webfonts/uicons-bold-straight.eot#iefix") format("embedded-opentype"), url("../webfonts/uicons-bold-straight.woff2") format("woff2"), url("../webfonts/uicons-bold-straight.woff") format("woff");
+}
+
+@each $selector in FlatIconVariables.$fi-selectors {
+  #{$selector}[class^="fi-br-"]:before,
+  #{$selector}[class*="fi-br-"]:before {
+    display: block;
+    font-family: uicons-bold-rounded !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@each $selector in FlatIconVariables.$fi-selectors {
+  #{$selector}[class^="fi-bs-"]:before,
+  #{$selector}[class*="fi-bs-"]:before {
+    display: block;
+    font-family: uicons-bold-straight !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@each $iconName, $iconValue in FlatIconVariables.$fi-icons-rounded-bold {
+  .fi-br-#{$iconName}:before {
+    content: $iconValue;
+  }
+}
+
+@each $iconName, $iconValue in FlatIconVariables.$fi-icons-straight-bold {
+  .fi-bs-#{$iconName}:before {
+    content: $iconValue;
+  }
+}
+    

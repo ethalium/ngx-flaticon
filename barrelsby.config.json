@@ -1,0 +1,13 @@
+{
+  "directory": "./projects/ng-flat-icon/src",
+  "delete": true,
+  "noHeader": true,
+  "location": "top",
+  "singleQuotes": true,
+  "mode": "flat",
+  "name": "public-api.ts",
+  "exclude": [
+    "./public-api.ts",
+    "./test.ts"
+  ]
+}

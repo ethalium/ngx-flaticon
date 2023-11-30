@@ -1,0 +1,27 @@
+@use "variables" as FlatIconVariables ;
+
+@font-face {
+  font-family: "uicons-brands";
+  src: url("../webfonts/uicons-brands.eot#iefix") format("embedded-opentype"), url("../webfonts/uicons-brands.woff2") format("woff2"), url("../webfonts/uicons-brands.woff") format("woff");
+}
+
+@each $selector in FlatIconVariables.$fi-selectors {
+  #{$selector}[class^="fi-brands-"]:before,
+  #{$selector}[class*="fi-brands-"]:before {
+    font-family: uicons-brands !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@each $iconName, $iconValue in FlatIconVariables.$fi-icons-brands {
+  .fi-brands-#{$iconName}:before {
+    content: $iconValue;
+  }
+}
+    
