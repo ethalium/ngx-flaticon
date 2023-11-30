@@ -7,7 +7,7 @@
     <a href="https://www.npmjs.com/package/@fusoionic/ng-flat-icon" target="_blank"><img src="https://img.shields.io/bundlephobia/min/@fusoionic/ng-flat-icon?label=size" alt="Package Size" /></a>
 </p>
 
-![ng-flat-icon](https://raw.githubusercontent.com/fusoionic/ng-flat-icon/main/preview.jpg "ng-flat-icon preview")
+![ng-flat-icon](https://raw.githubusercontent.com/fusoionic/ng-flat-icon/main/preview.png "ng-flat-icon preview")
 
 ## Installation
 `npm i @fusoionic/ng-flat-icon`
