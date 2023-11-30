@@ -18,7 +18,7 @@
 
 #
 ### Styles:
-Import the `FlatIcon` Stylesheet from the package assets or download the sources from <a href="https://github.com/fusoionic/ng-flat-icon/assets" target="_blank">Github</a>.
+Import the `FlatIcon` Stylesheet from the package assets or download the sources from <a href="https://github.com/fusoionic/ng-flat-icon/tree/main/projects/ng-flat-icon/assets" target="_blank">Github</a>.
 
 ```scss
 @import "@fusoionic/ng-flat-icon/assets/flat-icons";
