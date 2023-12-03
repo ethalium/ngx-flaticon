@@ -1,16 +1,16 @@
 {
-  "name": "@fusoionic/ng-flat-icon",
+  "name": "@fusoionic/ng-flaticon",
   "version": "1.0.0",
   "description": "Angular directives for flat-icons",
   "author": "marxlnfcs",
-  "homepage": "https://github.com/fusoionic/ng-flat-icon#readme",
+  "homepage": "https://github.com/fusoionic/ng-flaticon#readme",
   "bugs": {
-    "url": "https://github.com/fusoionic/ng-flat-icon/issues"
+    "url": "https://github.com/fusoionic/ng-flaticon/issues"
   },
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fusoionic/ng-flat-icon.git"
+    "url": "git+https://github.com/fusoionic/ng-flaticon.git"
   },
   "keywords": [
     "angular",

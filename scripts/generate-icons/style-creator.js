@@ -17,20 +17,12 @@ function createVariables(icons){
 
     // create icons
     for(const [type, weights] of Object.entries(icons)){
-        if(!['brands'].includes(type)){
-            for(const [weight, icons] of Object.entries(weights)){
-                rows.push(`$fi-icons-${type}-${weight}: (`);
-                for(const [iconName, iconValue] of Object.entries(icons)){
-                    rows.push([' ', `"${iconName}": "\\${iconValue}",`]);
-                }
-                rows.push(');');
-            }
-        }else{
-            rows.push(`$fi-icons-${type}: (`);
-            for(const [iconName, iconValue] of Object.entries(weights)){
-                rows.push([' ', `"${iconName}": "\\${iconValue}",`]);
-            }
-            rows.push(');');
+        for(const [weight, icons] of Object.entries(weights)){
+          rows.push(type === 'brands' ? `$fi-icons-${type}: (` : `$fi-icons-${type}-${weight}: (`);
+          for(const [iconName, iconValue] of Object.entries(icons)){
+            rows.push([' ', `"${iconName}": "\\${iconValue}",`]);
+          }
+          rows.push(');');
         }
     }
 

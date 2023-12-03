@@ -40,6 +40,8 @@ module.exports = {
             solid: extractIcons(styleFile, new RegExp(/.fi-sr-(.*):before {\n\s+content: "(.*)";\n}/, 'g')),
             bold: extractIcons(styleFile, new RegExp(/.fi-br-(.*):before {\n\s+content: "(.*)";\n}/, 'g')),
         },
-        brands: extractIcons(styleFile, new RegExp(/.fi-(brands-(.*)):before {\n\s+content: "(.*)";\n}/, 'g'))
+        brands: {
+            regular: extractIcons(styleFile, new RegExp(/.fi-(brands-(.*)):before {\n\s+content: "(.*)";\n}/, 'g'))
+        }
     })
 }

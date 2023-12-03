@@ -1,4 +1,4 @@
-import {Inject, inject, Injectable, Optional} from "@angular/core";
+import {Inject, Injectable, Optional} from "@angular/core";
 import {FLAT_ICON_OPTIONS} from "../flat-icon.constant";
 import {FlatIconFindOneOptions, FlatIconFindOptions, FlatIconOptions} from "../interfaces/flat-icon-options.interface";
 import {
@@ -6,7 +6,9 @@ import {
   FlatIconAnimation,
   FlatIconAnimationType,
   FlatIconDetailed,
-  FlatIcons, FlatIconType, FlatIconWeight
+  FlatIcons,
+  FlatIconType,
+  FlatIconWeight
 } from "../interfaces/flat-icon.interface";
 import {FLAT_ICONS} from "../data/flat-icon.data";
 import {FLAT_ICON_ANIMATIONS} from "../data/flat-icon-animations.data";
@@ -37,34 +39,52 @@ export class FlatIconService {
 
   private get icons(): FlatIcons {
     if(!this._icons){
+
+      // create icons object
       this._icons = {};
+
+      // create icons
       Object.entries(FLAT_ICONS).map(([type, weights]) => {
-        Object.entries(weights).map(([weight, name]) => {
-          const key = (name as string).trim().toLowerCase();
-          if(!this._icons[key]) {
-            this._icons[key] = {
-              name: name,
-              className: this.createIconClassName(name, this.options.defaultType, this.options.defaultWeight),
-              types: [],
-              weights: []
-            };
-          }
-          const icon = this._icons[key] as FlatIconDetailed;
-          if(!icon.types.includes(type as any)) icon.weights.push(type as any);
-          if(!icon.weights.includes(weight as any)) icon.weights.push(weight as any);
+        Object.entries(weights).map(([weight, icons]) => {
+          Object.keys(icons).map(iconName => {
+            const key = iconName.trim().toLowerCase();
+            if(!this._icons[key]) {
+              this._icons[key] = {
+                name: iconName,
+                className: '',
+                types: [],
+                weights: []
+              };
+            }
+            const icon = this._icons[key] as FlatIconDetailed;
+            if(!icon.types.includes(type as any)) icon.types.push(type as any);
+            if(!icon.weights.includes(weight as any)) icon.weights.push(weight as any);
+          });
         });
       });
+
+      // set default className
+      Object.values(this._icons).map(icon => {
+        const types: FlatIconType[] = ['brands', this.options.defaultType, 'rounded', 'straight'];
+        const weights: FlatIconWeight[] = [this.options.defaultWeight, 'regular', 'bold', 'solid'];
+        icon.className = this.createIconClassName(
+          icon.name,
+          types.find(t => icon.types.includes(t)),
+          weights.find(w => icon.weights.includes(w))
+        );
+      });
+
     }
     return this._icons;
   }
 
-  private createIconClassName(name: string, type: FlatIconType, weight: FlatIconWeight): string {
+  private createIconClassName(name: string, type?: FlatIconType|null, weight?: FlatIconWeight|null): string {
     const types = { 'rounded': 'r', 'straight': 's' };
     const weights = { 'regular': 'r', 'bold': 'b', 'solid': 's' };
     if(type === 'brands'){
-      return `fi-brands`;
+      return `fi-brands-${name}`;
     }
-    return `fi-${weights[weight]}${types[type]}-${name}`;
+    return `fi-${weights[(weight || 'regular')]}${types[type || 'rounded']}-${name}`;
   }
 
   find(options?: Partial<FlatIconFindOptions>): FlatIconDetailed[] {
@@ -81,15 +101,16 @@ export class FlatIconService {
     const icons: FlatIconDetailed[] = [];
 
     // get icon keys
-    const iconKeys = Object.keys(this.icons).filter(name => !opts.search || name.trim().toLowerCase().indexOf(opts.search.trim().toLowerCase()));
+    const iconKeys = Object.keys(this.icons).filter(name => !opts.search || name.trim().toLowerCase().indexOf(opts.search.trim().toLowerCase()) !== -1);
+    const iconExact = iconKeys.filter(n => opts.search && n.trim().toLowerCase() === opts.search.trim().toLowerCase());
+    const iconSimilar = iconKeys.filter(n => !iconExact.includes(n));
 
     // find icons
-    for(let key of iconKeys){
+    for(let key of [...iconExact, ...iconSimilar]){
       const icon = this.icons[key];
       if(opts.limit > 0 && icons.length >= opts.limit) break;
-      if(opts.search && icon.name.trim().toLowerCase().indexOf(opts.search.trim().toLowerCase().toString()) === -1) continue;
       if(opts.types.length > 0 && !opts.types.filter(t => icon.types.includes(t)).length) continue;
-      if(opts.weights.length > 0 && !opts.weights.filter(w => icon.weights.includes(w)).length) continue;
+      if(!icon.types.includes('brands') && opts.weights.length > 0 && !opts.weights.filter(w => icon.weights.includes(w)).length) continue;
       icons.push(icon);
     }
 
@@ -109,9 +130,9 @@ export class FlatIconService {
     // find icons
     const icons = this.find({
       search: name,
-      types: [type, 'brands'],
-      weights: [weight],
-      limit: 1,
+      //types: [type, 'brands'],
+      //weights: [weight],
+      //limit: 1,
     });
 
     // check if icon has been found

@@ -1,13 +1,13 @@
 {
-  "name": "@fusoionic/ng-flat-icon",
+  "name": "@fusoionic/ng-flaticon",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "npm run generate-index && ng build",
-    "publish": "npm run build && cd dist/ng-flat-icon && npm publish --access public",
+    "publish": "npm run build && cd dist/ng-flaticon && npm publish --access public",
     "generate-icons": "node ./scripts/generate-icons/index",
-    "generate-index": "rimraf ./projects/ng-flat-icon/src/public-api.ts && barrelsby --config ./barrelsby.config.json",
+    "generate-index": "rimraf ./projects/ng-flaticon/src/public-api.ts && barrelsby --config ./barrelsby.config.json",
     "test": "ng test"
   },
   "private": false,

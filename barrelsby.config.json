@@ -1,5 +1,5 @@
 {
-  "directory": "./projects/ng-flat-icon/src",
+  "directory": "./projects/ng-flaticon/src",
   "delete": true,
   "noHeader": true,
   "location": "top",
@@ -8,6 +8,6 @@
   "name": "public-api.ts",
   "exclude": [
     "./public-api.ts",
-    "./test.ts"
+    "(.*).spec.ts"
   ]
 }

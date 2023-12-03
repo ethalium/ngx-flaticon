@@ -11,8 +11,8 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "paths": {
-      "ng-flat-icon": [
-        "./dist/ng-flat-icon"
+      "ng-flaticon": [
+        "./dist/ng-flaticon"
       ]
     },
     "sourceMap": true,

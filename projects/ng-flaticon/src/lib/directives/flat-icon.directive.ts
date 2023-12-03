@@ -101,6 +101,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
       this.changeDetectorRef.markForCheck();
 
     });
+    this.changes$.next();
   }
 
   ngOnChanges(){
