@@ -38,7 +38,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
   @Input() color?: string|null;
   @Input() type?: FlatIconType|null;
   @Input() weight?: FlatIconWeight|null;
-  @Input() animation?: FlatIconAnimationType;
+  @Input() animation?: FlatIconAnimationType|null;
   @Input() duration?: number|null;
   @Input() delay?: number|null;
 
