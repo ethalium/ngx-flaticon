@@ -16,7 +16,9 @@
 
 ---
 
-#
+### Version Convention:
+The version of this package reflects the version of FlatIcons.
+
 ### Styles:
 Import the `FlatIcon` Stylesheet from the package assets or download the sources from <a href="https://github.com/fusoionic/ng-flaticon/tree/main/projects/ng-flaticon/assets" target="_blank">Github</a>.
 

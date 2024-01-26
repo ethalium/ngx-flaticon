@@ -109,7 +109,6 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.clear();
     if(!this.changes$.closed){
       this.changes$.complete();
     }
