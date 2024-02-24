@@ -1,6 +1,6 @@
 {
   "name": "@fusoionic/ng-flaticon",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Angular directives for flat-icons",
   "author": "marxlnfcs",
   "homepage": "https://github.com/fusoionic/ng-flaticon#readme",
@@ -21,7 +21,8 @@
   ],
   "peerDependencies": {
     "@angular/common": ">= 14.0.0",
-    "@angular/core": ">= 14.0.0"
+    "@angular/core": ">= 14.0.0",
+    "@fusoionic/ng-tailwind-color": "^1.2.0"
   },
   "private": false,
   "dependencies": {},

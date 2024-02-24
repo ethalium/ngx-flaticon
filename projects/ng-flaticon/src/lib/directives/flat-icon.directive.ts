@@ -13,10 +13,11 @@ import {
 import {FlatIconAnimationType, FlatIconType, FlatIconWeight} from "../interfaces/flat-icon.interface";
 import {FlatIconService, getFlatIcon} from "../services/flat-icon.service";
 import {debounceTime, Subject} from "rxjs";
+import {TWColor} from "@fusoionic/ng-tailwind-color";
 
 interface FlatIconDirectiveData {
   name: string;
-  color: string|null;
+  color: TWColor|null;
   type: FlatIconType,
   weight: FlatIconWeight,
   animation: FlatIconAnimationType|null;
@@ -35,7 +36,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
   private changes$ = new Subject<void>();
 
   @Input({ required: true }) name!: string;
-  @Input() color?: string|null;
+  @Input() color?: TWColor|null;
   @Input() type?: FlatIconType|null;
   @Input() weight?: FlatIconWeight|null;
   @Input() animation?: FlatIconAnimationType|null;
