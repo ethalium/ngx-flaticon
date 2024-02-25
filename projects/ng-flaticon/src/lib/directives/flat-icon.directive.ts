@@ -13,11 +13,12 @@ import {
 import {FlatIconAnimationType, FlatIconType, FlatIconWeight} from "../interfaces/flat-icon.interface";
 import {FlatIconService, getFlatIcon} from "../services/flat-icon.service";
 import {debounceTime, Subject} from "rxjs";
-import {TWColor} from "@fusoionic/ng-tailwind-color";
+import {getTailwindService, TailwindService, TWColor} from "@fusoionic/ng-tailwind-color";
+import {TailwindColor} from "@fusoionic/ng-tailwind-color/lib/models/tailwind-color.model";
 
 interface FlatIconDirectiveData {
   name: string;
-  color: TWColor|null;
+  color: TailwindColor|null;
   type: FlatIconType,
   weight: FlatIconWeight,
   animation: FlatIconAnimationType|null;
@@ -53,6 +54,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
 
     @Optional() private fiService: FlatIconService = getFlatIcon(),
+    @Optional() private twService: TailwindService = getTailwindService(),
   ){}
 
   ngOnInit(){
@@ -94,6 +96,11 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
         this.elementStyles['--fi-animation-delay'] = `${data.delay}ms`;
       }
 
+      // set color
+      if(data.color){
+        this.elementStyles['color'] = `${data.color.toRgb()}`;
+      }
+
       // apply class and style objects
       this.elementClasses.map(c => this.renderer2.addClass(this.elementRef.nativeElement, c));
       Object.entries(this.elementStyles).map(s => this.renderer2.setStyle(this.elementRef.nativeElement, s[0], s[1], RendererStyleFlags2.Important));
@@ -118,7 +125,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
   private get data(): FlatIconDirectiveData {
     return {
       name: this.name,
-      color: this.color || null,
+      color: this.color ? this.twService.resolve(this.color) : null,
       type: this.type || this.fiService.options.defaultType,
       weight: this.weight || this.fiService.options.defaultWeight,
       animation: this.animation || null,
