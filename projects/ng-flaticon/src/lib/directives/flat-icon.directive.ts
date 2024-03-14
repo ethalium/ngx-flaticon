@@ -12,7 +12,7 @@ import {
 } from "@angular/core";
 import {FlatIconAnimationType, FlatIconType, FlatIconWeight} from "../interfaces/flat-icon.interface";
 import {FlatIconService, getFlatIcon} from "../services/flat-icon.service";
-import {debounceTime, Subject} from "rxjs";
+import {debounceTime, of, Subject, takeUntil} from "rxjs";
 import {getTailwindService, TailwindService, TWColor} from "@fusoionic/ng-tailwind-color";
 import {TailwindColor} from "@fusoionic/ng-tailwind-color/lib/models/tailwind-color.model";
 
@@ -34,7 +34,9 @@ interface FlatIconDirectiveData {
 })
 
 export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
+  private destroy$ = new Subject<void>();
   private changes$ = new Subject<void>();
+  private changesDebounced$ = new Subject<void>();
 
   @Input({ required: true }) name!: string;
   @Input() color?: TWColor|null;
@@ -58,7 +60,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
   ){}
 
   ngOnInit(){
-    this.changes$.pipe(debounceTime(0)).subscribe(() => {
+    of(of(null), this.changes$).pipe(takeUntil(this.destroy$)).subscribe(() => {
 
       // get data
       const data = this.data;
@@ -109,16 +111,19 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
       this.changeDetectorRef.markForCheck();
 
     });
-    this.changes$.next();
+    this.changesDebounced$.pipe(debounceTime(100)).subscribe(() => this.changes$.next());
   }
 
   ngOnChanges(){
-    this.changes$.next();
+    this.changesDebounced$.next();
   }
 
   ngOnDestroy(){
-    if(!this.changes$.closed){
-      this.changes$.complete();
+    if(!this.changes$.closed) this.changes$.complete();
+    if(!this.changesDebounced$.closed) this.changesDebounced$.complete();
+    if(!this.destroy$.closed){
+      this.destroy$.next();
+      this.destroy$.complete();
     }
   }
 
