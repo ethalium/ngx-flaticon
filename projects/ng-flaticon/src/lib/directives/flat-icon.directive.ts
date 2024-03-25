@@ -12,7 +12,7 @@ import {
 } from "@angular/core";
 import {FlatIconAnimationType, FlatIconType, FlatIconWeight} from "../interfaces/flat-icon.interface";
 import {FlatIconService, getFlatIcon} from "../services/flat-icon.service";
-import {debounceTime, of, Subject, takeUntil} from "rxjs";
+import {BehaviorSubject, debounceTime, mergeAll, of, Subject, takeUntil} from "rxjs";
 import {getTailwindService, TailwindService, TWColor} from "@fusoionic/ng-tailwind-color";
 import {TailwindColor} from "@fusoionic/ng-tailwind-color/lib/models/tailwind-color.model";
 
@@ -28,9 +28,6 @@ interface FlatIconDirectiveData {
 
 @Directive({
   selector: 'fi-icon, [fi-icon]',
-  host: {
-    '[class.fi-icon]': 'true',
-  }
 })
 
 export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
@@ -60,7 +57,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
   ){}
 
   ngOnInit(){
-    of(of(null), this.changes$).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    of(of(null), this.changes$).pipe(mergeAll(), takeUntil(this.destroy$)).subscribe(() => {
 
       // get data
       const data = this.data;
@@ -83,6 +80,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
       this.clear();
 
       // add base classes
+      this.elementClasses.push('fi-icon');
       this.elementClasses.push('fi', icon.className);
 
       // set base styles
@@ -106,6 +104,9 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
       // apply class and style objects
       this.elementClasses.map(c => this.renderer2.addClass(this.elementRef.nativeElement, c));
       Object.entries(this.elementStyles).map(s => this.renderer2.setStyle(this.elementRef.nativeElement, s[0], s[1], RendererStyleFlags2.Important));
+
+      // set current element data
+      this.elementData = data;
 
       // mark for check
       this.changeDetectorRef.markForCheck();
@@ -152,6 +153,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
     // clear class and style objects
     this.elementClasses = [];
     this.elementStyles = {};
+    this.elementData = null;
 
   }
 
