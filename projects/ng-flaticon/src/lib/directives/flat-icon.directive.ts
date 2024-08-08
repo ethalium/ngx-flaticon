@@ -85,7 +85,7 @@ export class FlatIconDirective implements OnInit, OnChanges, OnDestroy {
 
       // set base styles
       if(this.elementRef.nativeElement.tagName === 'FI-ICON') {
-        this.elementStyles['display'] = 'inline-block';
+        this.elementStyles['display'] = 'block';
         this.elementStyles['line-height'] = '1';
       }
 
