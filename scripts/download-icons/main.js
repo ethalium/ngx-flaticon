@@ -57,6 +57,7 @@ const main = {
     // copy scss files to output
     console.log(`Copying scss files to output...`);
     cpSync(join(tempDir, 'dist/assets/flat-icons.scss'), config.output.assets('flat-icons.scss'));
+    cpSync(join(tempDir, 'dist/assets/flat-icons.css'), config.output.assets('flat-icons.css'));
     cpSync(join(tempDir, 'dist/assets/scss'), config.output.scss(), {
       recursive: true,
     });
