@@ -1,5 +1,5 @@
 import {FlatIconFamily, FlatIconWeight} from "./flat-icon-types.interface";
-import {TWColor} from "@ethalium/ng-tailwind-color";
+import {TWColor} from "@ethalium/ngx-tailwind-color";
 
 export interface FlatIconBaseData {
   name: string;

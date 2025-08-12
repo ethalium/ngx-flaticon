@@ -1,5 +1,5 @@
 import {Directive, ElementRef, inject, OnChanges, OnDestroy, OnInit} from "@angular/core";
-import {getTailwindService, TailwindService} from "@ethalium/ng-tailwind-color";
+import {getTailwindService, TailwindService} from "@ethalium/ngx-tailwind-color";
 import {BehaviorSubject, debounceTime, Subject, takeUntil} from "rxjs";
 import {FlatIconService, getFlatIcon} from "../services/flat-icon.service";
 import {FlatIconItem} from "../interfaces/flat-icon.interface";

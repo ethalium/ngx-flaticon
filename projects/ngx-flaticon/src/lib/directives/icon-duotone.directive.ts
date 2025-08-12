@@ -1,6 +1,6 @@
 import {Directive, Input, OnChanges, OnInit} from "@angular/core";
 import {FlatIconBase} from "../models/flat-icon-base.model";
-import {TWColor} from "@ethalium/ng-tailwind-color";
+import {TWColor} from "@ethalium/ngx-tailwind-color";
 import {FlatIconFamily, FlatIconWeight} from "../interfaces/flat-icon-types.interface";
 
 @Directive({
