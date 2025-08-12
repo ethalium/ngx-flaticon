@@ -1,0 +1,30 @@
+{
+  "name": "@ethalium/ngx-flaticon",
+  "version": "3.3.1",
+  "description": "Angular directives for flat-icons",
+  "author": "marxlnfcs",
+  "homepage": "https://github.com/ethalium/ngx-flaticon#readme",
+  "bugs": {
+    "url": "https://github.com/ethalium/ngx-flaticon/issues"
+  },
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethalium/ngx-flaticon.git"
+  },
+  "keywords": [
+    "angular",
+    "angular2",
+    "flaticon",
+    "html",
+    "web"
+  ],
+  "peerDependencies": {
+    "@angular/common": ">=20.1.6",
+    "@angular/core": ">=20.1.6",
+    "@ethalium/ng-tailwind-color": ">=1.0.2"
+  },
+  "private": false,
+  "dependencies": {},
+  "sideEffects": false
+}

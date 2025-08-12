@@ -1,5 +1,5 @@
 {
-  "directory": "./projects/ng-flaticon/src",
+  "directory": "./projects/ngx-flaticon/src",
   "delete": true,
   "noHeader": true,
   "location": "top",
